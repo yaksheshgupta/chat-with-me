@@ -4,6 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login with Google</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #2c2c2c;
+      color: #e0e0e0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #status {
+      margin-top: 20px;
+      color: #ff4f4f;
+      font-size: 14px;
+    }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #ffffff;
+    }
+
+  </style>
   <script type="module">
     // Import the Firebase SDK
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
@@ -41,8 +84,12 @@
   </script>
 </head>
 <body>
-  <h1>Login with Google</h1>
+  <h1>Welcome to Our Chat App</h1>
   <button onclick="googleLogin()">Sign in with Google</button>
   <div id="status"></div>
+  <footer>
+    Made by Yakshesh ❤️
+  </footer>
+
 </body>
 </html>

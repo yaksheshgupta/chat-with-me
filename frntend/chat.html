@@ -47,6 +47,14 @@
         #emoji-btn:hover {
             background-color: #555;
         }
+        footer {
+        position: fixed;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        color: #ffffff;
+        }
+
     </style>
     <script type="module">
         import { EmojiButton } from 'https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js';
@@ -107,5 +115,8 @@
     <div id="chat"></div>
     <input id="message" type="text" placeholder="Type a message" onkeypress="sendMessage(event)" />
     <button id="emoji-btn">😀</button>
+    <footer>
+        Made by Yakshesh ❤️
+    </footer>
 </body>
 </html>
