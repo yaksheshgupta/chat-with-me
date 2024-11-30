@@ -23,7 +23,7 @@ export function joinChat() {
         return;
     }
 
-    ws = new WebSocket('ws://localhost:8080');
+    ws = new WebSocket('ws://20.197.1.196:9952');
 
     ws.onopen = () => {
         ws.send(JSON.stringify({ type: 'setName', data: username }));

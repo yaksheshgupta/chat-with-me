@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 9952 });
 const groups = {}; // Fresh on each server run
 
 wss.on('connection', (ws) => {
@@ -44,7 +44,7 @@ wss.on('connection', (ws) => {
   });
 });
 
-console.log('Server is running on ws://localhost:8080');
+console.log('Server is running on ws://localhost:9952');
 
 function joinGroup(ws, groupName) {
   if (!groups[groupName].includes(ws.username)) {
