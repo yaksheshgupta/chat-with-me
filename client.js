@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const readline = require('readline');
 
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('wss://3a69-2401-4900-6349-6e86-cc9e-f744-d128-6232.ngrok-free.app');
 let userName;
 let currentGroup;
 
