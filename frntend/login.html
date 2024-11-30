@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login with Google</title>
+  <script type="module">
+    // Import the Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCIC_EGH0Tnim1fZpQTvm9HLFYKJuARLzs",
+      authDomain: "chat-with-me-e4749.firebaseapp.com",
+      projectId: "chat-with-me-e4749",
+      storageBucket: "chat-with-me-e4749.appspot.com",
+      messagingSenderId: "588316904863",
+      appId: "1:588316904863:web:afd49f3f88a76b388201aa",
+      measurementId: "G-WCZG412PLL"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    // Define googleLogin as a global function
+    window.googleLogin = function() {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user;
+          localStorage.setItem('firebaseUser', JSON.stringify({ email: user.email, displayName: user.displayName }));
+          window.location.href = 'index.html'; // Redirect to chat page
+        })
+        .catch((error) => {
+          console.error('Error during Google sign-in:', error);
+          document.getElementById('status').innerText = `Error: ${error.message}`;
+        });
+    };
+  </script>
+</head>
+<body>
+  <h1>Login with Google</h1>
+  <button onclick="googleLogin()">Sign in with Google</button>
+  <div id="status"></div>
+</body>
+</html>
