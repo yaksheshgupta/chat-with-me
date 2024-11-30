@@ -24,7 +24,7 @@ export function joinChat() {
     }
 
     // Example for using the Ngrok public URL for WebSocket connection
-    ws = new WebSocket('wss://d944-2401-4900-6349-6e86-cc9e-f744-d128-6232.ngrok-free.app');
+    ws = new WebSocket('wss://3a69-2401-4900-6349-6e86-cc9e-f744-d128-6232.ngrok-free.app');
 
     ws.onopen = () => {
         ws.send(JSON.stringify({ type: 'setName', data: username }));
