@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        #chat {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #444;
+            padding: 10px;
+            background-color: #1e1e1e;
+        }
+        #message, #groupName {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            color: #e0e0e0;
+            background-color: #333;
+            border: 1px solid #444;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            color: #fff;
+            background-color: #444;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        #emoji-btn {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+        #emoji-btn:hover {
+            background-color: #555;
+        }
+    </style>
+    <script type="module">
+        import { EmojiButton } from 'https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@latest/dist/index.min.js';
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { joinChat, sendMessage, setUsername } from './chat.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCIC_EGH0Tnim1fZpQTvm9HLFYKJuARLzs",
+            authDomain: "chat-with-me-e4749.firebaseapp.com",
+            projectId: "chat-with-me-e4749",
+            storageBucket: "chat-with-me-e4749.appspot.com",
+            messagingSenderId: "588316904863",
+            appId: "1:588316904863:web:afd49f3f88a76b388201aa",
+            measurementId: "G-WCZG412PLL"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        window.onload = function() {
+          const userData = JSON.parse(localStorage.getItem('firebaseUser'));
+          if (!userData || !userData.displayName) {
+              alert('Please log in first.');
+              window.location.href = 'login.html'; // Redirect to login if not authenticated
+          } else {
+              setUsername(userData.displayName); // Call setUsername to assign the username in chat.js
+              document.getElementById('userDisplayName').innerText = `Welcome, ${userData.displayName}!`;
+          }
+
+          // Initialize Emoji Button
+          const picker = new EmojiButton();
+          const emojiButton = document.querySelector('#emoji-btn');
+          const messageInput = document.querySelector('#message');
+
+          picker.on('emoji', selection => {
+            const emoji = typeof selection === 'string' ? selection : selection.emoji;
+            messageInput.value += emoji;
+            messageInput.focus();
+          });
+
+          emojiButton.addEventListener('click', () => {
+            picker.togglePicker(emojiButton);
+          });
+        };
+
+        window.joinChat = joinChat;
+        window.sendMessage = sendMessage;
+    </script>
+</head>
+<body>
+    <h1 id="userDisplayName">Welcome!</h1>
+    <br />
+    <input id="groupName" type="text" placeholder="Enter group name" />
+    <br />
+    <button onclick="joinChat()">Join Group</button>
+    <hr />
+    <div id="chat"></div>
+    <input id="message" type="text" placeholder="Type a message" onkeypress="sendMessage(event)" />
+    <button id="emoji-btn">😀</button>
+</body>
+</html>
